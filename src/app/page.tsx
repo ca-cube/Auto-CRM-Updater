@@ -33,7 +33,7 @@ export default function Dashboard() {
     }, []);
 
     return (
-        <main className="min-h-screen p-8 lg:p-12 pb-32">
+        <main className="min-h-screen p-8 lg:p-12 pb-32 dashboard-bg">
             {/* Header */}
             <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
                 <div>
@@ -265,13 +265,6 @@ export default function Dashboard() {
                 </button>
             </div>
 
-            <style jsx>{`
-        main {
-          background-image: 
-            radial-gradient(circle at 0% 0%, rgba(16, 185, 129, 0.03) 0%, transparent 50%),
-            radial-gradient(circle at 100% 100%, rgba(99, 102, 241, 0.03) 0%, transparent 50%);
-        }
-      `}</style>
-        </main >
+        </main>
     );
 }

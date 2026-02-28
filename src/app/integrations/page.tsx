@@ -84,8 +84,8 @@ export default function IntegrationsPage() {
                                     <app.icon className={`w-6 h-6 ${app.color}`} />
                                 </div>
                                 <span className={`text-[10px] font-bold px-2 py-1 rounded ${app.status === 'Connected' || app.status === 'Active'
-                                        ? 'bg-emerald-500/10 text-emerald-500'
-                                        : 'bg-slate-800 text-slate-500'
+                                    ? 'bg-emerald-500/10 text-emerald-500'
+                                    : 'bg-slate-800 text-slate-500'
                                     }`}>
                                     {app.status.toUpperCase()}
                                 </span>
@@ -131,15 +131,6 @@ export default function IntegrationsPage() {
                 </div>
             </div>
 
-            <style jsx global>{`
-        @keyframes spin-slow {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 8s linear infinite;
-        }
-      `}</style>
         </main>
     );
 }
