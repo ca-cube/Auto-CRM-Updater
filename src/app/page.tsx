@@ -25,15 +25,30 @@ import ProbabilisticStage from "@/components/ProbabilisticStage";
 
 export default function Dashboard() {
     const [deals, setDeals] = useState<Deal[]>([]);
+    const [filteredDeals, setFilteredDeals] = useState<Deal[]>([]);
+    const [searchTerm, setSearchTerm] = useState("");
     const [selectedDeal, setSelectedDeal] = useState<Deal | null>(null);
+
 
     useEffect(() => {
         setDeals(MOCK_DEALS);
+        setFilteredDeals(MOCK_DEALS);
         setSelectedDeal(MOCK_DEALS[0]);
     }, []);
 
+    useEffect(() => {
+        const results = deals.filter(deal =>
+            deal.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            deal.stage.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredDeals(results);
+    }, [searchTerm, deals]);
+
+
     return (
         <main className="min-h-screen p-8 lg:p-12 pb-32 dashboard-bg">
+            <div className="max-w-7xl mx-auto">
+
             {/* Header */}
             <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6">
                 <div>
@@ -78,8 +93,11 @@ export default function Dashboard() {
                             <input
                                 type="text"
                                 placeholder="Search deals..."
-                                className="bg-slate-900/50 border border-slate-800 rounded-full py-2 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                className="bg-slate-900 border border-slate-800 rounded-full py-2 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/20 text-slate-200 placeholder:text-slate-500 w-full md:w-64"
                             />
+
                         </div>
                     </div>
 
@@ -99,7 +117,8 @@ export default function Dashboard() {
                     </div>
 
                     <div className="grid grid-cols-1 gap-4">
-                        {deals.map((deal) => (
+                        {filteredDeals.map((deal) => (
+
                             <motion.div
                                 key={deal.id}
                                 layoutId={deal.id}
@@ -265,6 +284,8 @@ export default function Dashboard() {
                 </button>
             </div>
 
+            </div>
         </main>
+
     );
 }
